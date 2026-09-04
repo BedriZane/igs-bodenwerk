@@ -1,0 +1,9 @@
+# Lokale Backups der Vor-Redesign-Stände (nicht veröffentlichen)
+*.bak
+
+# Editor-/Tool-Konfiguration
+.vscode/
+.claude/settings.local.json
+
+# macOS
+.DS_Store
