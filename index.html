@@ -111,6 +111,8 @@
     a { color: inherit; }
     ul { list-style: none; }
 
+    [hidden] { display: none !important; }
+
     ::selection { background: var(--amber); color: #fff; }
 
     :focus-visible {
@@ -1507,6 +1509,228 @@
     .form-status.success { background: rgba(121,135,111,.18); color: #C6D6BB; border: 1px solid rgba(121,135,111,.5); }
     .form-status.error   { background: rgba(220,53,69,.14);  color: #F3B0B6; border: 1px solid rgba(220,53,69,.42); }
 
+    /* --- Mehrstufiges Anfrageformular --- */
+    .wiz-nav {
+        display: flex;
+        gap: 6px;
+        list-style: none;
+        margin: 30px 0 12px;
+        counter-reset: none;
+    }
+    .wiz-nav li {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        flex: 1;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--muted-i);
+        opacity: .5;
+        transition: opacity .4s var(--e), color .4s var(--e);
+    }
+    .wiz-nav li b {
+        width: 24px; height: 24px;
+        flex-shrink: 0;
+        display: grid; place-items: center;
+        border-radius: 50%;
+        border: 1px solid var(--line-i);
+        font-size: 11.5px;
+        font-weight: 700;
+        transition: background .4s var(--e), color .4s var(--e), border-color .4s var(--e);
+    }
+    .wiz-nav li.is-on { opacity: 1; color: var(--bone); }
+    .wiz-nav li.is-on b { background: var(--grad); border-color: transparent; color: #fff; }
+    .wiz-nav li.is-done { opacity: 1; color: var(--muted-i); }
+    .wiz-nav li.is-done b { background: rgba(224,118,44,.22); border-color: rgba(224,118,44,.5); color: var(--amber-hi); }
+
+    .wiz-track {
+        height: 3px;
+        border-radius: 3px;
+        background: rgba(255,255,255,.08);
+        overflow: hidden;
+        margin-bottom: 30px;
+    }
+    .wiz-track i {
+        display: block;
+        height: 100%;
+        width: 33.33%;
+        border-radius: 3px;
+        background: var(--grad);
+        transition: width .55s var(--e);
+    }
+
+    .wiz-step { border: 0; padding: 0; margin: 0; }
+    .wiz-on .wiz-step:not(.is-active) { display: none; }
+    .wiz-step.is-active { animation: wiz-in .5s var(--e) both; }
+    @keyframes wiz-in { from { opacity: 0; transform: translateX(14px); } }
+
+    .f-label {
+        margin: 30px 0 12px;
+        font-size: 14.5px;
+        font-weight: 600;
+        color: var(--bone);
+    }
+    .wiz-step > *:first-child { margin-top: 0; }
+    .f-label em {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12.5px;
+        color: var(--muted-i);
+        margin-left: 6px;
+    }
+
+    /* Auswahl-Chips (Checkbox & Radio) */
+    .opt-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .opt { display: block; cursor: pointer; }
+    .opt input {
+        position: absolute;
+        width: 1px; height: 1px;
+        opacity: 0;
+        pointer-events: none;
+    }
+    .opt span {
+        display: block;
+        padding: 11px 18px;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--muted-i);
+        background: rgba(255,255,255,.04);
+        border: 1px solid var(--line-i);
+        border-radius: var(--r-pill);
+        transition: background .3s var(--e), border-color .3s var(--e),
+                    color .3s var(--e), transform .3s var(--e);
+    }
+    .opt:hover span { color: var(--bone); border-color: rgba(255,255,255,.28); }
+    .opt input:checked + span {
+        background: var(--grad);
+        border-color: transparent;
+        color: #fff;
+        transform: translateY(-1px);
+        box-shadow: var(--sh-amber);
+    }
+    .opt input:focus-visible + span { outline: 2px solid var(--amber-hi); outline-offset: 2px; }
+
+    /* Auswahllisten im Formular */
+    .field--select select {
+        width: 100%;
+        padding: 24px 40px 10px 16px;
+        font-family: var(--font-body);
+        font-size: 15.5px;
+        color: var(--bone);
+        background: rgba(255,255,255,.04);
+        border: 1px solid var(--line-i);
+        border-radius: var(--r-sm);
+        appearance: none;
+        -webkit-appearance: none;
+        cursor: pointer;
+        transition: border-color .35s var(--e), background .35s var(--e), box-shadow .35s var(--e);
+    }
+    .field--select::after {
+        content: '';
+        position: absolute;
+        right: 18px; top: 50%;
+        width: 8px; height: 8px;
+        margin-top: -2px;
+        border-right: 1.6px solid var(--muted-i);
+        border-bottom: 1.6px solid var(--muted-i);
+        transform: translateY(-50%) rotate(45deg);
+        pointer-events: none;
+    }
+    .field--select select:focus {
+        outline: none;
+        border-color: rgba(224,118,44,.6);
+        background: rgba(255,255,255,.07);
+        box-shadow: 0 0 0 4px rgba(224,118,44,.12);
+    }
+    .field--select select option { background: var(--ink-2); color: var(--bone); }
+    /* Beschriftung bleibt bei Auswahllisten dauerhaft oben */
+    .field--select label { transform: translateY(-10px) scale(.74); }
+
+    .field--plz { max-width: 100%; }
+
+    /* Fehlermeldung pro Gruppe */
+    .f-error {
+        display: none;
+        margin-top: 10px;
+        font-size: 13px;
+        font-weight: 500;
+        color: #F3B0B6;
+    }
+    .f-error.show { display: block; animation: pop .4s var(--e) both; }
+
+    .f-hint {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin-top: 24px;
+        padding: 14px 16px;
+        border-radius: var(--r-sm);
+        background: rgba(37,211,102,.08);
+        border: 1px solid rgba(37,211,102,.22);
+        font-size: 13.5px;
+        color: var(--muted-i);
+        line-height: 1.6;
+    }
+    .f-hint i { color: #25D366; font-size: 17px; margin-top: 1px; }
+    .f-hint a { color: var(--amber-hi); }
+
+    /* Datenschutz-Einwilligung */
+    .consent {
+        display: flex;
+        align-items: flex-start;
+        gap: 13px;
+        margin-top: 28px;
+        cursor: pointer;
+    }
+    .consent input {
+        position: absolute;
+        width: 1px; height: 1px;
+        opacity: 0;
+        pointer-events: none;
+    }
+    .consent-box {
+        position: relative;
+        flex-shrink: 0;
+        width: 22px; height: 22px;
+        margin-top: 1px;
+        border-radius: 7px;
+        border: 1px solid var(--line-i);
+        background: rgba(255,255,255,.04);
+        transition: background .3s var(--e), border-color .3s var(--e);
+    }
+    .consent-box::after {
+        content: '';
+        position: absolute;
+        left: 7px; top: 3px;
+        width: 6px; height: 11px;
+        border-right: 2px solid #fff;
+        border-bottom: 2px solid #fff;
+        transform: rotate(45deg) scale(0);
+        transition: transform .3s var(--e);
+    }
+    .consent input:checked + .consent-box { background: var(--grad); border-color: transparent; }
+    .consent input:checked + .consent-box::after { transform: rotate(45deg) scale(1); }
+    .consent input:focus-visible + .consent-box { outline: 2px solid var(--amber-hi); outline-offset: 3px; }
+    .consent.is-invalid .consent-box { border-color: rgba(220,53,69,.75); }
+    .consent-text { font-size: 13.5px; color: var(--muted-i); line-height: 1.65; }
+    .consent-text a { color: var(--amber-hi); }
+
+    /* Schritt-Navigation */
+    .wiz-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 32px;
+    }
+    .wiz-actions .btn { margin-top: 0; }
+    .wiz-actions .wiz-back { flex: 0 0 auto; width: auto; padding-inline: 26px; }
+    .wiz-actions .submit-btn { flex: 1; }
+
+    @media (max-width: 560px) {
+        .wiz-nav li span { display: none; }
+        .wiz-nav li { flex: 0 0 auto; }
+        .wiz-nav { gap: 10px; }
+    }
+
     /* --- Danke-Ansicht nach erfolgreicher Anfrage --- */
     .form-card.is-done > h3,
     .form-card.is-done > p,
@@ -1850,6 +2074,17 @@
         .cursor-glow { display: none; }
     }
     </style>
+
+    <!-- Ohne JavaScript: Einblend-Animationen abschalten, damit alle Inhalte
+         sichtbar sind und das Formular in voller Laenge nutzbar bleibt. -->
+    <noscript>
+        <style>
+            .reveal { opacity: 1 !important; transform: none !important; }
+            .split .word > span { transform: none !important; }
+            .rule { transform: scaleX(1) !important; }
+            .cursor-glow, .scroll-cue { display: none !important; }
+        </style>
+    </noscript>
 </head>
 <body>
 
@@ -2400,39 +2635,157 @@
 
                 <div class="form-status" id="formStatus" role="status"></div>
 
-                <form action="contact-handler.php" method="POST">
-                    <div class="form-grid">
-                        <div class="field">
-                            <input type="text" id="name" name="name" required placeholder=" ">
-                            <label for="name">Ihr Name *</label>
+                <form action="contact-handler.php" method="POST" id="anfrageForm" novalidate>
+
+                    <!-- Fortschritt -->
+                    <ol class="wiz-nav" id="wizNav" hidden>
+                        <li class="is-on"><b>1</b><span>Projekt</span></li>
+                        <li><b>2</b><span>Details</span></li>
+                        <li><b>3</b><span>Kontakt</span></li>
+                    </ol>
+                    <div class="wiz-track" id="wizTrack" aria-hidden="true" hidden><i id="wizFill"></i></div>
+
+                    <!-- ---------------- Schritt 1: Projekt ---------------- -->
+                    <fieldset class="wiz-step is-active" data-step="1">
+                        <legend class="sr-only">Schritt 1 von 3: Ihr Projekt</legend>
+
+                        <p class="f-label" id="lbl-leistung">Worum geht es? <em>Mehrfachauswahl möglich</em></p>
+                        <div class="opt-grid" role="group" aria-labelledby="lbl-leistung" data-required-group="leistung">
+                            <label class="opt"><input type="checkbox" name="leistung[]" value="Bodenbeläge verlegen"><span>Bodenbeläge verlegen</span></label>
+                            <label class="opt"><input type="checkbox" name="leistung[]" value="Untergrund vorbereiten"><span>Untergrund vorbereiten</span></label>
+                            <label class="opt"><input type="checkbox" name="leistung[]" value="Altboden entfernen"><span>Altboden entfernen</span></label>
+                            <label class="opt"><input type="checkbox" name="leistung[]" value="Fußleisten montieren"><span>Fußleisten montieren</span></label>
+                            <label class="opt"><input type="checkbox" name="leistung[]" value="Boden aufbereiten"><span>Boden aufbereiten</span></label>
+                            <label class="opt"><input type="checkbox" name="leistung[]" value="Raumgestaltung / Beratung"><span>Raumgestaltung</span></label>
                         </div>
-                        <div class="field">
-                            <input type="email" id="email" name="email" required placeholder=" ">
-                            <label for="email">Ihre E-Mail *</label>
+                        <p class="f-error" data-error-for="leistung">Bitte wählen Sie mindestens eine Leistung aus.</p>
+
+                        <p class="f-label" id="lbl-objekt">Um was für ein Objekt handelt es sich?</p>
+                        <div class="opt-grid" role="group" aria-labelledby="lbl-objekt">
+                            <label class="opt"><input type="radio" name="objektart" value="Wohnung"><span>Wohnung</span></label>
+                            <label class="opt"><input type="radio" name="objektart" value="Haus"><span>Haus</span></label>
+                            <label class="opt"><input type="radio" name="objektart" value="Gewerbe / Büro"><span>Gewerbe / Büro</span></label>
+                            <label class="opt"><input type="radio" name="objektart" value="Neubau"><span>Neubau</span></label>
                         </div>
-                        <div class="field">
-                            <input type="tel" id="phone" name="phone" placeholder=" ">
-                            <label for="phone">Telefonnummer</label>
+
+                        <p class="f-label" id="lbl-flaeche">Wie groß ist die Fläche ungefähr?</p>
+                        <div class="opt-grid" role="group" aria-labelledby="lbl-flaeche">
+                            <label class="opt"><input type="radio" name="flaeche" value="bis 20 m²"><span>bis 20 m²</span></label>
+                            <label class="opt"><input type="radio" name="flaeche" value="20–50 m²"><span>20–50 m²</span></label>
+                            <label class="opt"><input type="radio" name="flaeche" value="50–100 m²"><span>50–100 m²</span></label>
+                            <label class="opt"><input type="radio" name="flaeche" value="100–200 m²"><span>100–200 m²</span></label>
+                            <label class="opt"><input type="radio" name="flaeche" value="über 200 m²"><span>über 200 m²</span></label>
+                            <label class="opt"><input type="radio" name="flaeche" value="weiß ich noch nicht"><span>weiß ich noch nicht</span></label>
                         </div>
-                        <div class="field">
-                            <input type="text" id="service" name="service" placeholder=" ">
-                            <label for="service">Gewünschte Leistung</label>
+                    </fieldset>
+
+                    <!-- ---------------- Schritt 2: Details ---------------- -->
+                    <fieldset class="wiz-step" data-step="2">
+                        <legend class="sr-only">Schritt 2 von 3: Details zum Boden</legend>
+
+                        <div class="form-grid">
+                            <div class="field field--select">
+                                <select id="istBelag" name="ist_belag">
+                                    <option value="">Bitte wählen …</option>
+                                    <option>Teppich</option>
+                                    <option>Fliesen</option>
+                                    <option>Laminat</option>
+                                    <option>PVC / Vinyl</option>
+                                    <option>Parkett / Dielen</option>
+                                    <option>Estrich / Rohboden</option>
+                                    <option>weiß ich nicht</option>
+                                </select>
+                                <label for="istBelag">Aktueller Bodenbelag</label>
+                            </div>
+                            <div class="field field--select">
+                                <select id="wunschBelag" name="wunsch_belag">
+                                    <option value="">Bitte wählen …</option>
+                                    <option>Vinyl / Designbelag</option>
+                                    <option>Laminat</option>
+                                    <option>Parkett</option>
+                                    <option>Teppich</option>
+                                    <option>Kork</option>
+                                    <option>PVC</option>
+                                    <option>noch unentschieden – bitte beraten</option>
+                                </select>
+                                <label for="wunschBelag">Gewünschter Belag</label>
+                            </div>
                         </div>
-                        <div class="field full">
-                            <textarea id="message" name="message" required placeholder=" "></textarea>
-                            <label for="message">Ihre Nachricht *</label>
+
+                        <p class="f-label" id="lbl-zeit">Wann soll es losgehen?</p>
+                        <div class="opt-grid" role="group" aria-labelledby="lbl-zeit">
+                            <label class="opt"><input type="radio" name="zeitrahmen" value="so schnell wie möglich"><span>So schnell wie möglich</span></label>
+                            <label class="opt"><input type="radio" name="zeitrahmen" value="in den nächsten 4 Wochen"><span>In den nächsten 4 Wochen</span></label>
+                            <label class="opt"><input type="radio" name="zeitrahmen" value="in 1–3 Monaten"><span>In 1–3 Monaten</span></label>
+                            <label class="opt"><input type="radio" name="zeitrahmen" value="später / Planungsphase"><span>Später / Planungsphase</span></label>
                         </div>
-                    </div>
+
+                        <div class="form-grid" style="margin-top:26px;">
+                            <div class="field field--plz">
+                                <input type="text" id="plz" name="plz" inputmode="numeric" pattern="[0-9]{4,5}" maxlength="5" required placeholder=" ">
+                                <label for="plz">PLZ *</label>
+                            </div>
+                            <div class="field">
+                                <input type="text" id="ort" name="ort" placeholder=" ">
+                                <label for="ort">Ort</label>
+                            </div>
+                            <div class="field full">
+                                <textarea id="message" name="message" placeholder=" "></textarea>
+                                <label for="message">Ihre Nachricht (optional)</label>
+                            </div>
+                        </div>
+
+                        <p class="f-hint">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>Fotos vom Raum helfen uns enorm – schicken Sie sie gern vorab per <a href="https://wa.me/4915224694624" target="_blank" rel="noopener">WhatsApp</a>.</span>
+                        </p>
+                    </fieldset>
+
+                    <!-- ---------------- Schritt 3: Kontakt ---------------- -->
+                    <fieldset class="wiz-step" data-step="3">
+                        <legend class="sr-only">Schritt 3 von 3: Ihre Kontaktdaten</legend>
+
+                        <div class="form-grid">
+                            <div class="field full">
+                                <input type="text" id="name" name="name" required autocomplete="name" placeholder=" ">
+                                <label for="name">Ihr Name *</label>
+                            </div>
+                            <div class="field">
+                                <input type="email" id="email" name="email" required autocomplete="email" placeholder=" ">
+                                <label for="email">Ihre E-Mail *</label>
+                            </div>
+                            <div class="field">
+                                <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder=" ">
+                                <label for="phone">Telefon (optional)</label>
+                            </div>
+                        </div>
+
+                        <label class="consent">
+                            <input type="checkbox" name="datenschutz" value="1" required>
+                            <span class="consent-box" aria-hidden="true"></span>
+                            <span class="consent-text">Ich habe die <a href="datenschutz.html">Datenschutzerklärung</a> gelesen und bin damit einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage verwendet werden. *</span>
+                        </label>
+                    </fieldset>
 
                     <div class="hp-field" aria-hidden="true">
                         <label for="website">Website</label>
                         <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
                     </div>
 
-                    <button type="submit" class="btn submit-btn magnetic">
-                        <i class="fas fa-paper-plane"></i> Anfrage senden
-                    </button>
-                    <p class="form-note">Mit dem Absenden stimmen Sie unserer <a href="datenschutz.html">Datenschutzerklärung</a> zu.</p>
+                    <!-- ---------------- Navigation ---------------- -->
+                    <div class="wiz-actions">
+                        <button type="button" class="btn btn--ghost on-dark-btn wiz-back" id="wizBack" hidden>
+                            <i class="fas fa-arrow-left"></i> Zurück
+                        </button>
+                        <button type="button" class="btn submit-btn wiz-next" id="wizNext" hidden>
+                            Weiter <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button type="submit" class="btn submit-btn" id="wizSubmit">
+                            <i class="fas fa-paper-plane"></i> Anfrage senden
+                        </button>
+                    </div>
+
+                    <p class="form-note">Alle Angaben sind unverbindlich und kostenlos. Pflichtfelder sind mit * markiert.</p>
                 </form>
 
                 <!-- Danke-Ansicht: ersetzt das Formular nach erfolgreichem Absenden -->
@@ -2901,6 +3254,112 @@
     toTop.addEventListener('click', function () {
         window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
     });
+
+    /* ------------------------------------------------------------------
+       13b) Mehrstufiges Anfrageformular
+    ------------------------------------------------------------------ */
+    (function () {
+        var form = document.getElementById('anfrageForm');
+        if (!form) return;
+
+        var steps     = [].slice.call(form.querySelectorAll('.wiz-step'));
+        var navItems  = [].slice.call(form.querySelectorAll('#wizNav li'));
+        var wizNav    = document.getElementById('wizNav');
+        var wizTrack  = document.getElementById('wizTrack');
+        var fill      = document.getElementById('wizFill');
+        var btnBack   = document.getElementById('wizBack');
+        var btnNext   = document.getElementById('wizNext');
+        var btnSubmit = document.getElementById('wizSubmit');
+        var consent   = form.querySelector('.consent');
+        var current   = 0;
+
+        // Ab hier uebernimmt JavaScript: Schritte einzeln anzeigen
+        form.classList.add('wiz-on');
+        wizNav.hidden = false;
+        wizTrack.hidden = false;
+
+        function show(i, scroll) {
+            current = Math.max(0, Math.min(steps.length - 1, i));
+            steps.forEach(function (st, n) { st.classList.toggle('is-active', n === current); });
+            navItems.forEach(function (li, n) {
+                li.classList.toggle('is-on', n === current);
+                li.classList.toggle('is-done', n < current);
+            });
+            fill.style.width = ((current + 1) / steps.length * 100).toFixed(2) + '%';
+            btnBack.hidden   = current === 0;
+            btnNext.hidden   = current === steps.length - 1;
+            btnSubmit.hidden = current !== steps.length - 1;
+
+            if (scroll) {
+                var top = wizNav.getBoundingClientRect().top;
+                if (top < 100 || top > window.innerHeight - 160) {
+                    wizNav.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+                }
+            }
+        }
+
+        function validateStep(i) {
+            var st = steps[i];
+            var ok = true;
+
+            // Gruppen, in denen mindestens eine Auswahl noetig ist
+            [].slice.call(st.querySelectorAll('[data-required-group]')).forEach(function (grp) {
+                var hit = grp.querySelector('input:checked') !== null;
+                var err = st.querySelector('[data-error-for="' + grp.getAttribute('data-required-group') + '"]');
+                if (err) err.classList.toggle('show', !hit);
+                if (!hit) ok = false;
+            });
+            if (!ok) return false;
+
+            // Einwilligung: eigene Markierung statt Browser-Blase (Feld ist visuell versteckt)
+            if (consent && st.contains(consent)) {
+                var box = consent.querySelector('input');
+                consent.classList.toggle('is-invalid', !box.checked);
+                if (!box.checked) { consent.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' }); return false; }
+            }
+
+            // Uebrige Pflichtfelder ueber die Browser-Pruefung
+            var fields = [].slice.call(st.querySelectorAll('input:not([type=checkbox]), select, textarea'));
+            for (var n = 0; n < fields.length; n++) {
+                if (!fields[n].checkValidity()) { fields[n].reportValidity(); return false; }
+            }
+            return true;
+        }
+
+        btnNext.addEventListener('click', function () {
+            if (validateStep(current)) show(current + 1, true);
+        });
+        btnBack.addEventListener('click', function () { show(current - 1, true); });
+
+        // Fehlermarkierungen verschwinden, sobald etwas ausgewaehlt wird
+        form.addEventListener('change', function (e) {
+            var grp = e.target.closest('[data-required-group]');
+            if (grp) {
+                var err = form.querySelector('[data-error-for="' + grp.getAttribute('data-required-group') + '"]');
+                if (err && grp.querySelector('input:checked')) err.classList.remove('show');
+            }
+            if (consent && consent.contains(e.target)) consent.classList.remove('is-invalid');
+        });
+
+        // Enter blaettert weiter, statt vorzeitig abzusenden
+        form.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA' && current < steps.length - 1) {
+                e.preventDefault();
+                btnNext.click();
+            }
+        });
+
+        form.addEventListener('submit', function (e) {
+            for (var n = 0; n < steps.length; n++) {
+                show(n);
+                if (!validateStep(n)) { e.preventDefault(); show(n, true); return; }
+            }
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Wird gesendet …';
+        });
+
+        show(0);
+    })();
 
     /* ------------------------------------------------------------------
        14) Formular-Status nach Redirect von contact-handler.php
