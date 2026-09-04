@@ -1507,6 +1507,103 @@
     .form-status.success { background: rgba(121,135,111,.18); color: #C6D6BB; border: 1px solid rgba(121,135,111,.5); }
     .form-status.error   { background: rgba(220,53,69,.14);  color: #F3B0B6; border: 1px solid rgba(220,53,69,.42); }
 
+    /* --- Danke-Ansicht nach erfolgreicher Anfrage --- */
+    .form-card.is-done > h3,
+    .form-card.is-done > p,
+    .form-card.is-done form { display: none; }
+
+    .form-success { display: none; text-align: center; }
+    .form-card.is-done .form-success { display: block; }
+    .form-success:focus { outline: none; }
+
+    .fs-badge {
+        position: relative;
+        width: 96px; height: 96px;
+        margin: 6px auto 28px;
+        display: grid; place-items: center;
+    }
+    .fs-badge::before {
+        content: '';
+        position: absolute; inset: 0;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(224,118,44,.30), transparent 68%);
+        animation: fs-glow 2.8s var(--e-io) .9s infinite;
+    }
+    @keyframes fs-glow {
+        0%, 100% { transform: scale(.9);  opacity: .55; }
+        50%      { transform: scale(1.12); opacity: .95; }
+    }
+    .fs-check { position: relative; width: 96px; height: 96px; display: block; }
+    .fs-check .fs-ring,
+    .fs-check .fs-tick { fill: none; stroke: url(#fsGrad); stroke-linecap: round; stroke-linejoin: round; }
+    .fs-check .fs-ring {
+        stroke-width: 2.6;
+        stroke-dasharray: 214; stroke-dashoffset: 214;
+        animation: fs-draw .9s var(--e) .15s forwards;
+    }
+    .fs-check .fs-tick {
+        stroke-width: 4.2;
+        stroke-dasharray: 45; stroke-dashoffset: 45;
+        animation: fs-draw .45s var(--e) .8s forwards;
+    }
+    @keyframes fs-draw { to { stroke-dashoffset: 0; } }
+
+    .form-success h3 { font-size: clamp(26px, 3.4vw, 36px); color: var(--bone); }
+    .form-success > p {
+        margin: 16px auto 0;
+        max-width: 44ch;
+        font-size: 16px;
+        color: var(--muted-i);
+        line-height: 1.75;
+    }
+
+    .fs-steps {
+        display: grid;
+        gap: 2px;
+        margin: 32px auto 0;
+        max-width: 430px;
+        text-align: left;
+    }
+    .fs-step {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 15px 18px;
+        border-radius: var(--r-sm);
+        background: rgba(255,255,255,.04);
+        border: 1px solid var(--line-i);
+    }
+    .fs-step b {
+        flex-shrink: 0;
+        width: 24px; height: 24px;
+        display: grid; place-items: center;
+        border-radius: 50%;
+        background: var(--grad);
+        color: #fff;
+        font-size: 11.5px;
+        font-weight: 700;
+    }
+    .fs-step span { font-size: 14.5px; color: var(--muted-i); line-height: 1.6; }
+    .fs-step span em { font-style: normal; color: var(--bone); font-weight: 600; }
+
+    .fs-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 32px;
+    }
+    .fs-actions .btn { padding: 15px 28px; font-size: 15px; }
+
+    .fs-hint {
+        margin-top: 24px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line-i);
+        font-size: 13px;
+        color: var(--muted-i);
+    }
+    .fs-hint a { color: var(--amber-hi); }
+
     .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
     /* ==========================================================================
@@ -2297,7 +2394,7 @@
                 </div>
             </div>
 
-            <div class="form-card reveal d2">
+            <div class="form-card reveal d2" id="formCard">
                 <h3>Kostenlose Anfrage stellen</h3>
                 <p>Füllen Sie das Formular aus – wir melden uns schnellstmöglich bei Ihnen zurück.</p>
 
@@ -2337,6 +2434,57 @@
                     </button>
                     <p class="form-note">Mit dem Absenden stimmen Sie unserer <a href="datenschutz.html">Datenschutzerklärung</a> zu.</p>
                 </form>
+
+                <!-- Danke-Ansicht: ersetzt das Formular nach erfolgreichem Absenden -->
+                <div class="form-success" id="formSuccess" role="status" aria-live="polite" tabindex="-1">
+                    <div class="fs-badge">
+                        <svg class="fs-check" viewBox="0 0 96 96" aria-hidden="true" focusable="false">
+                            <defs>
+                                <linearGradient id="fsGrad" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%"   stop-color="#A9491A"/>
+                                    <stop offset="46%"  stop-color="#E0762C"/>
+                                    <stop offset="100%" stop-color="#FFB44D"/>
+                                </linearGradient>
+                            </defs>
+                            <circle class="fs-ring" cx="48" cy="48" r="34"/>
+                            <path class="fs-tick" d="M33 49 l10 10 l19.5 -21"/>
+                        </svg>
+                    </div>
+
+                    <h3>Vielen Dank für Ihre Anfrage!</h3>
+                    <p>Ihre Nachricht ist bei uns angekommen. Wir melden uns in der Regel
+                       innerhalb von 24 Stunden bei Ihnen zurück – meistens deutlich schneller.</p>
+
+                    <div class="fs-steps">
+                        <div class="fs-step">
+                            <b>1</b>
+                            <span><em>Wir prüfen Ihre Anfrage</em> und überlegen, was für Ihr Projekt sinnvoll ist.</span>
+                        </div>
+                        <div class="fs-step">
+                            <b>2</b>
+                            <span><em>Wir melden uns bei Ihnen</em> – telefonisch oder per E-Mail, ganz wie es Ihnen lieber ist.</span>
+                        </div>
+                        <div class="fs-step">
+                            <b>3</b>
+                            <span><em>Kostenlose Besichtigung vor Ort</em> und danach Ihr unverbindliches Festpreis-Angebot.</span>
+                        </div>
+                    </div>
+
+                    <div class="fs-actions">
+                        <a href="tel:015224694624" class="btn btn--amber magnetic">
+                            <i class="fas fa-phone"></i> Direkt anrufen
+                        </a>
+                        <a href="#home" class="btn btn--ghost on-dark-btn magnetic">
+                            Zurück zum Anfang
+                        </a>
+                    </div>
+
+                    <p class="fs-hint">
+                        Es eilt? Schreiben Sie uns direkt per
+                        <a href="https://wa.me/4915224694624" target="_blank" rel="noopener">WhatsApp</a>
+                        oder rufen Sie an: Mo–Fr 07:00 – 18:00 Uhr.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -2757,16 +2905,28 @@
     /* ------------------------------------------------------------------
        14) Formular-Status nach Redirect von contact-handler.php
     ------------------------------------------------------------------ */
-    var formStatus = document.getElementById('formStatus');
+    var formStatus  = document.getElementById('formStatus');
+    var formCard    = document.getElementById('formCard');
+    var formSuccess = document.getElementById('formSuccess');
     var result = new URLSearchParams(window.location.search).get('contact');
-    if (formStatus && result) {
-        if (result === 'success') {
-            formStatus.textContent = 'Vielen Dank für Ihre Anfrage! Wir melden uns schnellstmöglich bei Ihnen.';
-            formStatus.classList.add('show', 'success');
-        } else if (result === 'error') {
-            formStatus.textContent = 'Leider ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder rufen Sie uns an.';
-            formStatus.classList.add('show', 'error');
-        }
+
+    if (result === 'success' && formCard) {
+        // Formular gegen die Danke-Ansicht tauschen
+        formCard.classList.add('is-done');
+        formCard.classList.add('visible');           // Reveal ueberspringen, sofort sichtbar
+        requestAnimationFrame(function () {
+            formSuccess.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+            formSuccess.focus({ preventScroll: true });
+        });
+    } else if (result === 'error' && formStatus) {
+        formStatus.innerHTML = 'Leider konnte Ihre Anfrage nicht versendet werden. ' +
+            'Bitte versuchen Sie es erneut oder rufen Sie uns an: ' +
+            '<a href="tel:015224694624" style="color:inherit;font-weight:700;">0152 / 246 946 24</a>.';
+        formStatus.classList.add('show', 'error');
+        formStatus.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+    }
+
+    if (result) {
         var url = new URL(window.location.href);
         url.searchParams.delete('contact');
         window.history.replaceState({}, '', url.pathname + url.search + '#contact');
