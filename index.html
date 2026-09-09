@@ -4,8 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IGS-Bodenwerk – Bodenverlegung &amp; Raumgestaltung in Kiel</title>
-    <meta name="description" content="IGS-Bodenwerk – Ihr Experte für Bodenverlegung, Untergrundvorbereitung und Raumgestaltung in Kiel und Umgebung. Professionell, zuverlässig, fair.">
+    <meta name="description" content="IGS-Bodenwerk – Ihr Experte für Bodenverlegung, Untergrundvorbereitung und Raumgestaltung in Kiel und Umgebung – auf Wunsch inklusive Materialbeschaffung. Professionell, zuverlässig, fair.">
     <meta name="theme-color" content="#100E0C">
+    <link rel="canonical" href="https://www.igs-bodenwerk.de/">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+
+    <!-- Open Graph / Social-Vorschau (WhatsApp, Instagram, Facebook) -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:site_name" content="IGS-Bodenwerk">
+    <meta property="og:url" content="https://www.igs-bodenwerk.de/">
+    <meta property="og:title" content="IGS-Bodenwerk – Bodenverlegung &amp; Raumgestaltung in Kiel">
+    <meta property="og:description" content="Bodenleger-Handwerk aus Kiel: Bodenbeläge verlegen, Untergrund vorbereiten, Altboden entfernen, Fußleisten, Aufbereitung und Materialbeschaffung – alles aus einer Hand.">
+    <meta property="og:image" content="https://www.igs-bodenwerk.de/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Frisch verlegter Boden von IGS-Bodenwerk">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Strukturierte Daten: lokales Handwerksunternehmen -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HomeAndConstructionBusiness",
+        "@id": "https://www.igs-bodenwerk.de/#business",
+        "name": "IGS-Bodenwerk",
+        "description": "Bodenleger-Handwerk aus Kiel: Verlegung aller gängigen Bodenbeläge, Untergrundvorbereitung, Altbodenentfernung, Fußleistenmontage, Aufbereitung alter Böden, Raumgestaltung und Materialbeschaffung aus einer Hand.",
+        "url": "https://www.igs-bodenwerk.de/",
+        "telephone": "+4915224694624",
+        "email": "info@igs-bodenwerk.de",
+        "image": "https://www.igs-bodenwerk.de/images/og-image.jpg",
+        "founder": { "@type": "Person", "name": "Imat Gümüs" },
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Saarbrückenstr. 175",
+            "postalCode": "24113",
+            "addressLocality": "Kiel",
+            "addressRegion": "Schleswig-Holstein",
+            "addressCountry": "DE"
+        },
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "07:00",
+            "closes": "18:00"
+        },
+        "areaServed": [
+            { "@type": "City", "name": "Kiel" },
+            { "@type": "City", "name": "Preetz" },
+            { "@type": "City", "name": "Plön" },
+            { "@type": "City", "name": "Eckernförde" },
+            { "@type": "City", "name": "Rendsburg" },
+            { "@type": "City", "name": "Neumünster" },
+            { "@type": "State", "name": "Schleswig-Holstein" }
+        ],
+        "sameAs": ["https://www.instagram.com/igsbodenwerk/"],
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Leistungen",
+            "itemListElement": [
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bodenbeläge verlegen", "description": "Laminat, Vinyl, PVC, Kork, Teppich und Parkett – verklebt oder schwimmend." } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Untergrund vorbereiten", "description": "Spachteln, Ausgleichen, Grundierung, Feuchtigkeitsprüfung." } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Fußleisten montieren" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Altboden entfernen", "description": "Demontage und umweltgerechte Entsorgung alter Beläge." } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Alte Böden aufbereiten", "description": "Parkett schleifen, versiegeln, Kratzer ausbessern." } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Raumgestaltung" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Materialbeschaffung", "description": "Beratung, Mengenberechnung, Bestellung über den Fachhandel und Lieferung auf die Baustelle." } }
+            ]
+        }
+    }
+    </script>
 
     <!-- Fonts: Fraunces (Display) + Epilogue (UI/Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1227,6 +1295,115 @@
     .card-list li:hover { color: var(--amber-deep); border-color: rgba(224,118,44,.45); background: rgba(224,118,44,.07); }
 
     /* ==========================================================================
+       Materialbeschaffung — Beschaffungsmodelle & Vorteile
+       ========================================================================== */
+    .material { background: var(--bone-2); }
+    .material-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 18px;
+        margin-top: 56px;
+    }
+    .mat-card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding: 34px 30px 32px;
+        border-radius: var(--r);
+        background: var(--white);
+        border: 1px solid var(--line);
+        box-shadow: var(--sh-1);
+        overflow: hidden;
+        transition: transform .5s var(--e), box-shadow .5s var(--e);
+    }
+    .mat-card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: var(--grad-soft);
+        opacity: 0;
+        transition: opacity .5s var(--e);
+        pointer-events: none;
+    }
+    .mat-card:hover { transform: translateY(-8px); box-shadow: var(--sh-3); }
+    .mat-card:hover::after { opacity: 1; }
+    .mat-ico {
+        width: 50px; height: 50px;
+        display: grid; place-items: center;
+        border-radius: 15px;
+        background: var(--ink);
+        color: var(--amber-hi);
+        font-size: 19px;
+        margin-bottom: 22px;
+        transition: transform .5s var(--e), background .5s var(--e);
+    }
+    .mat-card:hover .mat-ico { transform: rotate(-8deg) scale(1.06); background: var(--grad); color: #fff; }
+    .mat-card h3 { font-size: 21px; margin-bottom: 10px; }
+    .mat-card p  { font-size: 15px; color: var(--muted); line-height: 1.65; flex: 1; }
+    .mat-tag {
+        position: relative;
+        align-self: flex-start;
+        display: inline-flex; align-items: center; gap: 7px;
+        margin-top: 22px;
+        padding: 7px 13px;
+        border-radius: 999px;
+        font-size: 12.5px; font-weight: 700; letter-spacing: .02em;
+        color: var(--amber-deep);
+        background: var(--grad-soft);
+        border: 1px solid rgba(224,118,44,.22);
+    }
+    .mat-tag i { font-size: 11px; }
+
+    .mat-panel {
+        margin-top: 22px;
+        padding: clamp(32px, 4.5vw, 54px);
+        border-radius: var(--r);
+        background: var(--ink);
+        color: var(--bone);
+        display: grid;
+        grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+        gap: clamp(30px, 4vw, 60px);
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+    }
+    .mat-panel::before {
+        content: '';
+        position: absolute; z-index: -1;
+        width: 520px; height: 520px;
+        right: -180px; top: -220px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(224,118,44,.28), transparent 68%);
+        pointer-events: none;
+    }
+    .mat-panel h3 {
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: clamp(26px, 2.8vw, 34px);
+        line-height: 1.12;
+        letter-spacing: -.01em;
+    }
+    .mat-panel > div > p { margin-top: 18px; color: var(--muted-i); font-size: 15.5px; line-height: 1.7; }
+    .mat-panel .btn { margin-top: 28px; }
+    .mat-list { list-style: none; display: grid; gap: 16px; }
+    .mat-list li { display: flex; gap: 15px; align-items: flex-start; font-size: 15px; line-height: 1.55; }
+    .mat-list i {
+        flex: 0 0 auto;
+        width: 34px; height: 34px;
+        display: grid; place-items: center;
+        border-radius: 10px;
+        background: rgba(255,255,255,.06);
+        border: 1px solid var(--line-i);
+        color: var(--amber-hi);
+        font-size: 14px;
+    }
+    .mat-list b { display: block; margin-bottom: 2px; color: var(--bone); font-weight: 700; }
+    .mat-list span { color: var(--muted-i); }
+    .mat-note { margin-top: 28px; text-align: center; font-size: 14.5px; color: var(--muted); }
+
+    /* ==========================================================================
        Instagram CTA
        ========================================================================== */
     .insta {
@@ -1995,6 +2172,8 @@
     .d4 { transition-delay: .28s; }
     .d5 { transition-delay: .35s; }
     .d6 { transition-delay: .42s; }
+    .d7 { transition-delay: .49s; }
+    .d8 { transition-delay: .56s; }
 
     /* Split-Headlines: kein Block-Fade, nur der Wort-Reveal */
     .reveal.split { opacity: 1; transform: none; }
@@ -2039,6 +2218,7 @@
         .ba-stage { aspect-ratio: 4/3; }
         .process-steps { grid-template-columns: 1fr 1fr; gap: 34px; }
         .process-rail { display: none; }
+        .mat-panel { grid-template-columns: 1fr; }
     }
     @media (max-width: 560px) {
         .about-badge-row { flex-direction: column; align-items: flex-start; gap: 14px; }
@@ -2125,6 +2305,7 @@
                 <a href="#about">Über uns</a>
                 <a href="#prozess">Ablauf</a>
                 <a href="#services">Leistungen</a>
+                <a href="#material">Material</a>
                 <a href="#faq">FAQ</a>
             </nav>
 
@@ -2144,6 +2325,7 @@
     <a href="#about">Über uns</a>
     <a href="#prozess">Ablauf</a>
     <a href="#services">Leistungen</a>
+    <a href="#material">Material</a>
     <a href="#contact">Kontakt</a>
     <div class="mobile-nav-foot">
         <a href="tel:015224694624" class="btn btn--amber"><i class="fas fa-phone"></i> Anrufen</a>
@@ -2373,7 +2555,7 @@
                 <article class="step reveal d2">
                     <div class="step-dot"><i class="fas fa-ruler-combined"></i><em>2</em></div>
                     <h4>Kostenlose Besichtigung</h4>
-                    <p>Wir messen vor Ort auf, prüfen den Untergrund und erstellen ein kostenloses Angebot.</p>
+                    <p>Wir messen vor Ort auf, prüfen den Untergrund, bringen auf Wunsch Muster mit und erstellen ein kostenloses Angebot.</p>
                 </article>
                 <article class="step reveal d3">
                     <div class="step-dot"><i class="fas fa-screwdriver-wrench"></i><em>3</em></div>
@@ -2513,6 +2695,67 @@
     </div>
 </section>
 
+<!-- ============================ Materialbeschaffung ============================ -->
+<section class="material section" id="material">
+    <div class="container">
+        <div class="section-head center">
+            <span class="eyebrow reveal">Materialbeschaffung</span>
+            <h2 class="display-2 split reveal d1" data-split>Das Material besorgen wir – <em class="hl">wenn Sie mögen.</em></h2>
+            <p class="lead reveal d2">Auf Wunsch übernehmen wir die komplette Beschaffung: Beratung, Auswahl,
+               Mengenberechnung, Bestellung und Lieferung direkt auf die Baustelle. Alles aus einer Hand –
+               Sie müssen nichts schleppen, nichts nachbestellen und nichts zurückbringen.</p>
+        </div>
+
+        <div class="material-grid">
+            <article class="mat-card reveal d1">
+                <div class="mat-ico"><i class="fas fa-truck-ramp-box"></i></div>
+                <h3>Komplett über uns</h3>
+                <p>Sie sagen uns, wie es aussehen soll – wir liefern Belag, Trittschalldämmung, Dampfsperre,
+                   Kleber, Leisten und Profile passend dazu. Ein Ansprechpartner, ein Termin, eine Rechnung.</p>
+                <span class="mat-tag"><i class="fas fa-star"></i> Am häufigsten gewählt</span>
+            </article>
+
+            <article class="mat-card reveal d2">
+                <div class="mat-ico"><i class="fas fa-user-check"></i></div>
+                <h3>Sie kaufen selbst</h3>
+                <p>Sie haben Ihren Belag schon gefunden? Kein Problem. Wir sagen Ihnen vorher genau, welche
+                   Menge und welches Zubehör Sie brauchen – damit nichts fehlt und nichts übrig bleibt.</p>
+                <span class="mat-tag"><i class="fas fa-list-check"></i> Inklusive Materialliste</span>
+            </article>
+
+            <article class="mat-card reveal d3">
+                <div class="mat-ico"><i class="fas fa-swatchbook"></i></div>
+                <h3>Erst mal schauen</h3>
+                <p>Noch unentschieden? Zur kostenlosen Besichtigung bringen wir Muster mit und zeigen Ihnen,
+                   was zu Raum, Untergrund und Nutzung wirklich passt – ohne dass Sie sich festlegen müssen.</p>
+                <span class="mat-tag"><i class="fas fa-eye"></i> Muster vor Ort</span>
+            </article>
+        </div>
+
+        <div class="mat-panel reveal d2">
+            <div>
+                <h3>Warum das Material besser über uns läuft.</h3>
+                <p>Wir kaufen über den Fach- und Großhandel ein, nicht im Baumarktregal. Dort gibt es
+                   Qualitäten, die für Endkunden gar nicht im Regal liegen – und wir wissen aus jedem
+                   Projekt, welcher Belag in welchem Raum wirklich standhält.</p>
+                <a href="#contact" class="btn btn--amber magnetic">Material mit anfragen <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <ul class="mat-list">
+                <li><i class="fas fa-store"></i><span><b>Fachhandel statt Baumarkt</b>Geprüfte Qualitäten mit klarer Nutzungsklasse – passend zu Belastung, Feuchtigkeit und Fußbodenheizung.</span></li>
+                <li><i class="fas fa-calculator"></i><span><b>Die richtige Menge</b>Wir rechnen Verschnitt und Verlegemuster ein und bestellen aus einer Charge – keine Farbunterschiede, kein Nachbestellen.</span></li>
+                <li><i class="fas fa-layer-group"></i><span><b>Zubehör, das zusammenpasst</b>Dämmung, Dampfsperre, Kleber, Profile und Leisten – aufeinander und auf Ihren Untergrund abgestimmt.</span></li>
+                <li><i class="fas fa-truck-fast"></i><span><b>Lieferung zur Baustelle</b>Anlieferung, Einlagern und Akklimatisieren übernehmen wir – Ihr Auto und Ihr Rücken bleiben verschont.</span></li>
+                <li><i class="fas fa-recycle"></i><span><b>Verpackung entsorgen wir mit</b>Paletten, Folien und Kartons nehmen wir wieder mit. Sie behalten einen fertigen Raum – keinen Müll.</span></li>
+                <li><i class="fas fa-shield-halved"></i><span><b>Eine Gewährleistung für alles</b>Material und Verlegung aus einer Hand: Bei einer Reklamation gibt es keine Diskussion, wer zuständig ist.</span></li>
+            </ul>
+        </div>
+
+        <p class="mat-note reveal d3">Der Materialpreis steht transparent im Angebot – Sie entscheiden nach der
+           Besichtigung, ob wir beschaffen oder Sie selbst einkaufen.</p>
+    </div>
+</section>
+
 <!-- ============================ Instagram ============================ -->
 <section class="insta">
     <div class="container">
@@ -2563,7 +2806,15 @@
                 </div>
                 <div class="faq-item reveal d6">
                     <button class="faq-q" aria-expanded="false">Übernehmen Sie auch die Materialbeschaffung?<span class="faq-sign"></span></button>
-                    <div class="faq-a"><div><p>Gern. Wir beraten Sie zu Material und Optik und beschaffen den Belag über den Groß- und Fachhandel. Selbstverständlich verlegen wir auch von Ihnen gestelltes Material.</p></div></div>
+                    <div class="faq-a"><div><p>Gern – auf Wunsch komplett. Wir beraten Sie zu Belag und Optik, berechnen die Menge inklusive Verschnitt, bestellen über den Groß- und Fachhandel und lassen alles direkt zur Baustelle liefern. Zubehör wie Trittschalldämmung, Dampfsperre, Kleber und Leisten gehört selbstverständlich dazu. Wenn Sie lieber selbst einkaufen, verlegen wir natürlich auch von Ihnen gestelltes Material.</p></div></div>
+                </div>
+                <div class="faq-item reveal d7">
+                    <button class="faq-q" aria-expanded="false">Ist das Material über Sie teurer als im Baumarkt?<span class="faq-sign"></span></button>
+                    <div class="faq-a"><div><p>Das kommt auf Belag und Qualität an. Wir kaufen über den Fachhandel ein und weisen den Materialanteil im Angebot separat aus – Sie sehen den Preis also vorab und können in Ruhe vergleichen. Dafür bekommen Sie Qualitäten, die es im Baumarkt oft nicht gibt, die richtige Menge aus einer Charge und Zubehör, das wirklich zum Belag passt.</p></div></div>
+                </div>
+                <div class="faq-item reveal d8">
+                    <button class="faq-q" aria-expanded="false">Was passiert, wenn Material übrig bleibt oder fehlt?<span class="faq-sign"></span></button>
+                    <div class="faq-a"><div><p>Wenn wir beschaffen, kümmern wir uns darum: Fehlt etwas, bestellen wir nach – Sie müssen kein zweites Mal losfahren. Übrig gebliebenes Material bleibt bei Ihnen – als Reserve für spätere Reparaturen, denn dieselbe Charge bekommen Sie später nicht mehr. Bei selbst gekauftem Material bekommen Sie vorab eine genaue Materialliste von uns, damit es gar nicht erst dazu kommt.</p></div></div>
                 </div>
             </div>
         </div>
@@ -2710,6 +2961,16 @@
                                 </select>
                                 <label for="wunschBelag">Gewünschter Belag</label>
                             </div>
+                        </div>
+
+                        <p class="f-label" id="lbl-material">Wer besorgt das Material?</p>
+                        <div class="opt-grid" role="group" aria-labelledby="lbl-material">
+                            <label class="opt"><input type="radio" name="material" value="IGS soll das Material beschaffen"><span>Bitte über Sie beschaffen</span></label>
+                            <label class="opt"><input type="radio" name="material" value="Kunde stellt das Material selbst"><span>Ich kaufe selbst ein</span></label>
+                            <label class="opt"><input type="radio" name="material" value="noch offen – Beratung gewünscht"><span>Noch offen – bitte beraten</span></label>
+                        </div>
+                        <div class="opt-grid" style="margin-top:10px;">
+                            <label class="opt"><input type="checkbox" name="muster" value="1"><span><i class="fas fa-swatchbook" style="margin-right:6px;"></i>Bitte Muster zur Besichtigung mitbringen</span></label>
                         </div>
 
                         <p class="f-label" id="lbl-zeit">Wann soll es losgehen?</p>
@@ -2876,6 +3137,7 @@
                     <li><a href="#services">Altboden entfernen</a></li>
                     <li><a href="#services">Böden aufbereiten</a></li>
                     <li><a href="#services">Raumgestaltung</a></li>
+                    <li><a href="#material">Materialbeschaffung</a></li>
                 </ul>
             </div>
 
