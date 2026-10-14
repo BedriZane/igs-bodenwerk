@@ -1,7 +1,19 @@
 <?php
 declare(strict_types=1);
 
-$recipient    = 'info@igs-bodenwerk.de';
+// Mail-Konfiguration (SMTP-Zugang) liegt außerhalb von Git in mail-config.php.
+$config     = [];
+$configFile = __DIR__ . '/mail-config.php';
+if (is_file($configFile)) {
+    $loaded = require $configFile;
+    if (is_array($loaded)) {
+        $config = $loaded;
+    }
+}
+
+$recipient    = (string) ($config['recipient']  ?? 'info@igs-bodenwerk.de');
+$fromEmail    = (string) ($config['from_email'] ?? 'noreply@igs-bodenwerk.de');
+$fromName     = (string) ($config['from_name']  ?? 'Website Kontaktformular');
 
 // Zurück auf die Seite, von der das Formular kam (nur bekannte Seiten erlaubt).
 $origins      = ['index' => 'index.html', 'kontakt' => 'kontakt.html'];
@@ -109,11 +121,31 @@ $body .= str_repeat('-', 46) . "\n";
 $body .= 'Eingegangen am ' . date('d.m.Y \u\m H:i') . " Uhr\n";
 $body .= "Datenschutzerklärung wurde beim Absenden bestätigt.\n";
 
-$headers   = [];
-$headers[] = 'From: Website Kontaktformular <noreply@igs-bodenwerk.de>';
-$headers[] = 'Reply-To: ' . $name . ' <' . $email . '>';
-$headers[] = 'Content-Type: text/plain; charset=UTF-8';
+if (!empty($config['smtp_user']) && !empty($config['smtp_pass'])) {
+    // Versand über ein echtes Postfach der Domain – zuverlässig bei Hostinger.
+    require __DIR__ . '/smtp-mailer.php';
+    $mailer = new SmtpMailer(
+        (string) ($config['smtp_host'] ?? 'smtp.hostinger.com'),
+        (int)    ($config['smtp_port'] ?? 465),
+        (string) $config['smtp_user'],
+        (string) $config['smtp_pass'],
+        (string) ($config['smtp_encryption'] ?? 'ssl')
+    );
+    $sent = $mailer->send($fromEmail, $fromName, $recipient, mb_substr($subjectText, 0, 160), $body, $email, $name);
+    if (!$sent) {
+        error_log('Kontaktformular: SMTP-Versand fehlgeschlagen – ' . $mailer->lastError());
+    }
+} else {
+    // Rückfall ohne Konfiguration: PHP mail()
+    $headers   = [];
+    $headers[] = 'From: ' . $fromName . ' <' . $fromEmail . '>';
+    $headers[] = 'Reply-To: ' . $name . ' <' . $email . '>';
+    $headers[] = 'Content-Type: text/plain; charset=UTF-8';
 
-$sent = mail($recipient, $subject, $body, implode("\r\n", $headers));
+    $sent = mail($recipient, $subject, $body, implode("\r\n", $headers));
+    if (!$sent) {
+        error_log('Kontaktformular: mail() fehlgeschlagen');
+    }
+}
 
 redirect($sent ? 'success' : 'error');
