@@ -2,7 +2,11 @@
 declare(strict_types=1);
 
 $recipient    = 'info@igs-bodenwerk.de';
-$redirectBase = 'index.html';
+
+// Zurück auf die Seite, von der das Formular kam (nur bekannte Seiten erlaubt).
+$origins      = ['index' => 'index.html', 'kontakt' => 'kontakt.html'];
+$origin       = is_string($_POST['origin'] ?? null) ? $_POST['origin'] : 'index';
+$redirectBase = $origins[$origin] ?? 'index.html';
 
 function redirect(string $status): void {
     global $redirectBase;

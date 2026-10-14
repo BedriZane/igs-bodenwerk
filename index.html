@@ -6,6 +6,31 @@
     <title>IGS-Bodenwerk – Bodenverlegung &amp; Raumgestaltung in Kiel</title>
     <meta name="description" content="IGS-Bodenwerk – Ihr Experte für Bodenverlegung, Untergrundvorbereitung und Raumgestaltung in Kiel und Umgebung – auf Wunsch inklusive Materialbeschaffung. Professionell, zuverlässig, fair.">
     <meta name="theme-color" content="#100E0C">
+
+    <!-- Google Ads: Consent Mode v2 – Werbe-Cookies bleiben aus, bis der Besucher im
+         Cookie-Hinweis zustimmt. Die Entscheidung wird lokal im Browser gemerkt. -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied',
+        'wait_for_update': 500
+    });
+    try {
+        if (localStorage.getItem('igs-consent') === 'granted') {
+            gtag('consent', 'update', { 'ad_storage': 'granted', 'ad_user_data': 'granted', 'ad_personalization': 'granted' });
+        }
+    } catch (e) {}
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18506027104"></script>
+    <script>
+    gtag('js', new Date());
+    gtag('config', 'AW-18506027104');
+    </script>
     <link rel="canonical" href="https://www.igs-bodenwerk.de/">
     <meta name="robots" content="index, follow, max-image-preview:large">
 
@@ -2253,6 +2278,54 @@
         .rule { transform: scaleX(1) !important; }
         .cursor-glow { display: none; }
     }
+    /* ==========================================================================
+       Cookie-Hinweis (Google Ads Conversion-Tracking)
+       ========================================================================== */
+    .cc {
+        position: fixed;
+        left: 16px; right: 16px; bottom: 16px;
+        z-index: 120;
+        max-width: 440px;
+        padding: 22px 22px 20px;
+        border-radius: 20px;
+        background: rgba(16,14,12,.94);
+        color: var(--bone);
+        border: 1px solid var(--line-i);
+        box-shadow: 0 30px 60px -30px rgba(0,0,0,.6);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        font-family: var(--font-body);
+        animation: cc-in .5s var(--e) both;
+    }
+    .cc[hidden] { display: none; }
+    @keyframes cc-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .cc h2 {
+        font-family: var(--font-body);
+        font-size: 15px; font-weight: 700; letter-spacing: -.01em;
+        line-height: 1.3; margin: 0 0 8px;
+        color: var(--bone);
+    }
+    .cc p { font-size: 13.5px; line-height: 1.6; color: var(--muted-i); margin: 0; }
+    .cc p a { color: var(--amber-hi); text-decoration: none; border-bottom: 1px solid rgba(255,180,77,.4); }
+    .cc-actions { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+    .cc-btn {
+        flex: 1 1 auto;
+        padding: 12px 18px;
+        font-family: var(--font-body);
+        font-size: 14px; font-weight: 600;
+        border-radius: var(--r-pill);
+        border: 1px solid var(--line-i);
+        background: transparent; color: var(--bone);
+        cursor: pointer;
+        transition: background .3s var(--e), color .3s var(--e), transform .3s var(--e);
+    }
+    .cc-btn:hover { background: rgba(255,255,255,.08); transform: translateY(-1px); }
+    .cc-btn--ok { background: var(--grad); border-color: transparent; color: #fff; }
+    .cc-btn--ok:hover { background: var(--grad); filter: brightness(1.08); }
+    @media (max-width: 480px) { .cc { padding: 18px; } .cc-btn { flex: 1 1 100%; } }
+    /* Solange der Hinweis offen ist, weichen die schwebenden Buttons auf schmalen Bildschirmen */
+    @media (max-width: 720px) { .cc-open .fbtn-stack { opacity: 0; pointer-events: none; } }
+
     </style>
 
     <!-- Ohne JavaScript: Einblend-Animationen abschalten, damit alle Inhalte
@@ -3148,6 +3221,7 @@
                     <li><a href="#prozess">Ablauf</a></li>
                     <li><a href="#faq">FAQ</a></li>
                     <li><a href="#einsatzgebiet">Einsatzgebiet</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
                     <li><a href="impressum.html">Impressum</a></li>
                     <li><a href="datenschutz.html">Datenschutz</a></li>
                 </ul>
@@ -3180,6 +3254,7 @@
             <nav>
                 <a href="impressum.html">Impressum</a>
                 <a href="datenschutz.html">Datenschutz</a>
+                <a href="#" data-cc-open>Cookie-Einstellungen</a>
             </nav>
         </div>
     </div>
@@ -3632,6 +3707,8 @@
     var result = new URLSearchParams(window.location.search).get('contact');
 
     if (result === 'success' && formCard) {
+        // Google Ads: Conversion nur bei erfolgreich gesendeter Anfrage melden
+        gtag('event', 'conversion', { 'send_to': 'AW-18506027104/3kCICJKggpkdEOCgrvhE' });
         // Formular gegen die Danke-Ansicht tauschen
         formCard.classList.add('is-done');
         formCard.classList.add('visible');           // Reveal ueberspringen, sofort sichtbar
@@ -3660,6 +3737,47 @@
 
     // Initialer Lauf
     onScroll();
+})();
+</script>
+
+<!-- ============================ Cookie-Hinweis ============================ -->
+<div class="cc" id="ccBanner" role="dialog" aria-labelledby="ccTitle" aria-describedby="ccText" hidden>
+    <h2 id="ccTitle">Dürfen wir messen, ob unsere Anzeigen ankommen?</h2>
+    <p id="ccText">Wir nutzen Google Ads Conversion-Tracking, um zu erkennen, ob eine Anfrage über eine Google-Anzeige kam.
+       Dafür setzt Google Cookies – nur mit Ihrer Zustimmung. Sie können Ihre Wahl jederzeit über „Cookie-Einstellungen“ im Fußbereich ändern.
+       Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+    <div class="cc-actions">
+        <button type="button" class="cc-btn cc-btn--ok" id="ccAccept">Zustimmen</button>
+        <button type="button" class="cc-btn" id="ccDecline">Ablehnen</button>
+    </div>
+</div>
+<script>
+(function () {
+    var KEY = 'igs-consent';
+    var banner = document.getElementById('ccBanner');
+    if (!banner) return;
+
+    function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+    function save(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+
+    function choose(v) {
+        save(v);
+        var state = v === 'granted' ? 'granted' : 'denied';
+        gtag('consent', 'update', { 'ad_storage': state, 'ad_user_data': state, 'ad_personalization': state });
+        banner.hidden = true;
+        document.body.classList.remove('cc-open');
+    }
+
+    document.getElementById('ccAccept').addEventListener('click', function () { choose('granted'); });
+    document.getElementById('ccDecline').addEventListener('click', function () { choose('denied'); });
+
+    // Fußzeile: "Cookie-Einstellungen" öffnet den Hinweis erneut
+    document.querySelectorAll('[data-cc-open]').forEach(function (a) {
+        a.addEventListener('click', function (e) { e.preventDefault(); banner.hidden = false; document.body.classList.add('cc-open'); });
+    });
+
+    var saved = read();
+    if (saved !== 'granted' && saved !== 'denied') { banner.hidden = false; document.body.classList.add('cc-open'); }
 })();
 </script>
 </body>
